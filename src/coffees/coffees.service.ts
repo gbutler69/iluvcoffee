@@ -8,6 +8,7 @@ import { Flavor } from './entities/flavor.entity';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { Event } from '../events/entities/event.entity';
 import { COFFEE_BRANDS } from './coffees.constants';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CoffeesService {
@@ -19,6 +20,7 @@ export class CoffeesService {
     private readonly dataSource: DataSource,
     @Inject(COFFEE_BRANDS)
     private readonly coffeeBrands: string[],
+    private readonly confingService: ConfigService,
   ) {}
 
   findAll(query: PaginationQueryDto) {
@@ -29,9 +31,9 @@ export class CoffeesService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const coffee = await this.coffeeRepository.findOne({
-      where: { id: +id },
+      where: { id: id },
       relations: { flavors: true },
     });
     if (!coffee) {
@@ -65,7 +67,7 @@ export class CoffeesService {
     return this.coffeeRepository.save(coffee);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     const coffee = await this.findOne(id);
     return this.coffeeRepository.remove(coffee);
   }

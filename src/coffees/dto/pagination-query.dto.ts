@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { IsInt, IsOptional, IsPositive } from 'class-validator';
 
 export class PaginationQueryDto {
