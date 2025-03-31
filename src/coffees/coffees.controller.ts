@@ -16,6 +16,7 @@ import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { ApiForbiddenResponse } from '@nestjs/swagger';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -23,6 +24,7 @@ export class CoffeesController {
 
   @Get()
   @Public()
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   findAll(
     @Protocol('https') protocol: string,
     @Query() query: PaginationQueryDto,
