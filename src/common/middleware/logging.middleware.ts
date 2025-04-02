@@ -5,7 +5,6 @@ import { Request, Response } from 'express';
 export class LoggingMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: () => void) {
     console.time('Request-response time');
-    console.log(`Hello from middleware`);
     res.on('finish', () => console.timeEnd('Request-response time'));
     next();
   }

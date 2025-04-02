@@ -7,3 +7,10 @@ services:
       - "6432:5432"
     environment:
        POSTGRES_PASSWORD: pass123
+  test-db:
+    image:  postgres
+    restart: always
+    ports:
+      - "6433:5432"
+    environment:
+       POSTGRES_PASSWORD: pass123
